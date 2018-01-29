@@ -97,7 +97,11 @@ public class MainActivity extends AppCompatActivity {
                 String getData = new String();
                 for (String s : recData) {
                     getData += s + ",";
+
                 }
+            }
+            public void getaa(){
+                
             }
 
             @Override
