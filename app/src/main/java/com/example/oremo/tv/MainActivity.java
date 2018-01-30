@@ -22,7 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentTransaction transaction;
 
-    private SpeechRecognizer mSpeechRecognizer;
+    private Slide leftSlide;
+    private Slide rightSlide;
+
+    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,83 +36,45 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Slide slide = new Slide();
-                slide.setSlideEdge(Gravity.RIGHT);
+                page++;
+                switch (page){
+                    case 2: Fragment2 fragment2 = new Fragment2();
+                        fragment2.setEnterTransition(rightSlide);
+                        fragment2.setExitTransition(leftSlide);
 
-                ;
-                Fragment2 fragment2 = new Fragment2();
-                fragment2.setEnterTransition(slide);
-                FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
-                transaction2.replace(R.id.frame, fragment2);
-                transaction2.addToBackStack(null);
-                transaction2.commit();
+                        FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                        transaction2.replace(R.id.frame, fragment2);
+                        transaction2.addToBackStack(null);
+                        transaction2.commit();
+                        break;
+                    case 3: Fragment3 fragment3 = new Fragment3();
+                        fragment3.setEnterTransition(rightSlide);
+                        fragment3.setExitTransition(leftSlide);
+
+                        FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
+                        transaction3.replace(R.id.frame, fragment3);
+                        transaction3.addToBackStack(null);
+                        transaction3.commit();
+                        break;
+                }
+
             }
         });
 
 
 
         Fragment1 fragment1 = new Fragment1();
-        Slide slide = new Slide();
-        slide.setSlideEdge(Gravity.LEFT);
-        fragment1.setExitTransition(slide);
+        leftSlide = new Slide();
+        leftSlide.setSlideEdge(Gravity.LEFT);
+        rightSlide = new Slide();
+        rightSlide.setSlideEdge(Gravity.RIGHT);
+        //fragment1.setExitTransition(leftSlide);
         transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.frame, fragment1);
-        transaction.addToBackStack(null);
+        //transaction.addToBackStack(null);
         transaction.commit();
 
-        mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
-            @Override
-            public void onReadyForSpeech(Bundle params) {
-                Log.d("aaa","ggg");
-            }
 
-            @Override
-            public void onBeginningOfSpeech() {
-
-            }
-
-            @Override
-            public void onRmsChanged(float rmsdB) {
-
-            }
-
-            @Override
-            public void onBufferReceived(byte[] buffer) {
-
-            }
-
-            @Override
-            public void onEndOfSpeech() {
-
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-
-            @Override
-            public void onResults(Bundle results) {
-                ArrayList<String> recData = results
-                        .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-
-                String getData = new String();
-                for (String s : recData) {
-                    getData += s + ",";
-                }
-            }
-
-            @Override
-            public void onPartialResults(Bundle partialResults) {
-
-            }
-
-            @Override
-            public void onEvent(int eventType, Bundle params) {
-
-            }
-        });
     }
 
     private void printWindow() {
@@ -126,12 +91,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void speech(){
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 
-        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
-                getPackageName());
-    }
 }

@@ -2,12 +2,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.oremo.tv.fragment2">
+    android:background="@color/colorNavy"
+    tools:context="com.example.oremo.tv.Fragment2">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text= "12345"/>
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorGreen"
+            android:textSize="48dp"
+            android:text= "デザインシンキングでアプリを作る"/>
+    </LinearLayout>
+
+
 
 </FrameLayout>
