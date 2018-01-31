@@ -39,31 +39,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(page < fragments.length){
-                    page++;
-                }
-                switch (page){
-                    case 2: Fragment2 fragment2 = new Fragment2();
-                        fragment2.setEnterTransition(rightSlide);
-                        fragment2.setExitTransition(leftSlide);
-
-                        FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
-                        transaction2.replace(R.id.frame, fragment2);
-                        transaction2.addToBackStack(null);
-                        transaction2.commit();
-                        break;
-                    case 3: Fragment3 fragment3 = new Fragment3();
-                        fragment3.setEnterTransition(rightSlide);
-                        fragment3.setExitTransition(leftSlide);
-
-                        FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
-                        transaction3.replace(R.id.frame, fragment3);
-                        transaction3.addToBackStack(null);
-                        transaction3.commit();
-                        break;
-                }
-
+                nextSlide();
             }
         });
 
@@ -99,20 +75,45 @@ public class MainActivity extends AppCompatActivity {
         printHelper.printBitmap("view", bitmap);*/
     }
 
+    private void nextSlide(){
+        if(page < fragments.length){
+            page++;
+            switch (page){
+                case 2: Fragment2 fragment2 = new Fragment2();
+                    fragment2.setEnterTransition(rightSlide);
+                    fragment2.setExitTransition(leftSlide);
+
+                    FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                    transaction2.replace(R.id.frame, fragment2);
+                    transaction2.addToBackStack(null);
+                    transaction2.commit();
+                    break;
+                case 3: Fragment3 fragment3 = new Fragment3();
+                    fragment3.setEnterTransition(rightSlide);
+                    fragment3.setExitTransition(leftSlide);
+
+                    FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
+                    transaction3.replace(R.id.frame, fragment3);
+                    transaction3.addToBackStack(null);
+                    transaction3.commit();
+                    break;
+            }
+        }
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.d("keycode", keyCode+"");
-        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_DPAD_UP_LEFT) {
-            if(page > 0) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if(page > 1) {
                 page--;
             }
-            else if (page == 0){
+            else if (page == 1){
                 finish();
             }
         }
-
-        if(keyCode == KeyEvent.KEYCODE_DPAD_UP_LEFT){
-            return super.onKeyDown(KeyEvent.KEYCODE_BACK, event);
+        else if(keyCode == KeyEvent.KEYCODE_MEDIA_NEXT){
+            nextSlide();
         }
         return super.onKeyDown(keyCode,event);
     }

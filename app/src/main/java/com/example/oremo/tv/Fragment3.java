@@ -7,11 +7,13 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -98,6 +100,7 @@ public class Fragment3 extends Fragment {
 
             @Override
             public void onBeginningOfSpeech() {
+
                 Log.d("aaa","スタート");
             }
 
@@ -127,9 +130,16 @@ public class Fragment3 extends Fragment {
                         .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
                 String getData = new String();
+
                 for (String s : recData) {
-                    getData += s + ",";
+                    if(TextUtils.isEmpty(getData)){
+                        getData = s;
+                    }
+                    else{
+                        getData = s + ",";
+                    }
                 }
+                ((TextView)getView().findViewById(R.id.recordText)).setText(getData);
             }
 
             @Override
