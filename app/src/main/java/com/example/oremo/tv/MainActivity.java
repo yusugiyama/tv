@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -90,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
         printHelper.printBitmap("view", bitmap);*/
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d("keycode", keyCode+"");
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            page--;
 
+        }
+        return super.onKeyDown(keyCode,event);
+    }
 
 }
