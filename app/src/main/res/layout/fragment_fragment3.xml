@@ -1,0 +1,54 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorNavy"
+    tools:context="com.example.oremo.tv.Fragment3">
+
+    <!-- TODO: Update blank fragment layout -->
+    <include layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/omake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="おまけ"
+            android:textColor="@color/colorGreen"
+            android:textSize="48dp" />
+
+        <Button
+            android:id="@+id/print"
+            android:layout_below="@id/omake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="印刷"
+            android:layout_weight="0.9"/>
+
+        <Button android:id="@+id/record"
+            android:layout_below="@id/print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="音声"
+            android:layout_weight="0.8"
+            />
+
+        <TextView
+            android:layout_below="@id/record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_weight="1"/>
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>

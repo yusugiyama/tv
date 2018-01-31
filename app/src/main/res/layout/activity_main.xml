@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00326d"
+    android:background="@color/colorNavy"
     tools:context="com.example.oremo.tv.MainActivity">
 
     <LinearLayout
