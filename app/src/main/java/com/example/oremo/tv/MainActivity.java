@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.print.PrintHelper;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int page = 1;
 
+    private FragmentEnum[] fragments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                page++;
+                if(page < fragments.length){
+                    page++;
+                }
                 switch (page){
                     case 2: Fragment2 fragment2 = new Fragment2();
                         fragment2.setEnterTransition(rightSlide);
@@ -63,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        fragments = FragmentEnum.values();
+
+        FragmentEnum.hyoushi.getFragment();
         Fragment1 fragment1 = new Fragment1();
         leftSlide = new Slide();
         leftSlide.setSlideEdge(Gravity.LEFT);
@@ -70,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         rightSlide.setSlideEdge(Gravity.RIGHT);
         //fragment1.setExitTransition(leftSlide);
         transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.frame, fragment1);
+        transaction.add(R.id.frame, fragments[0].getFragment());
         //transaction.addToBackStack(null);
         transaction.commit();
 
@@ -90,6 +99,22 @@ public class MainActivity extends AppCompatActivity {
         printHelper.printBitmap("view", bitmap);*/
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d("keycode", keyCode+"");
+        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_DPAD_UP_LEFT) {
+            if(page > 0) {
+                page--;
+            }
+            else if (page == 0){
+                finish();
+            }
+        }
 
+        if(keyCode == KeyEvent.KEYCODE_DPAD_UP_LEFT){
+            return super.onKeyDown(KeyEvent.KEYCODE_BACK, event);
+        }
+        return super.onKeyDown(keyCode,event);
+    }
 
 }
