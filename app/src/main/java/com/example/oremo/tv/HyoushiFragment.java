@@ -9,16 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment1.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment1#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Fragment1 extends Fragment {
+public class HyoushiFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,21 +19,11 @@ public class Fragment1 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Fragment1() {
-        // Required empty public constructor
+    public HyoushiFragment() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment1.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Fragment1 newInstance(String param1, String param2) {
-        Fragment1 fragment = new Fragment1();
+    public static HyoushiFragment newInstance(String param1, String param2) {
+        HyoushiFragment fragment = new HyoushiFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +46,7 @@ public class Fragment1 extends Fragment {
 
         Log.e("aaa","eee");
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment1, container, false);
+        return inflater.inflate(R.layout.fragment_hyoushi, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -76,12 +57,6 @@ public class Fragment1 extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener) {
-            //mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
     }
 
     @Override

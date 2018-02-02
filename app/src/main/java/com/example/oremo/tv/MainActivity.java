@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         fragments = FragmentEnum.values();
 
-        FragmentEnum.hyoushi.getFragment();
-        Fragment1 fragment1 = new Fragment1();
         leftSlide = new Slide();
         leftSlide.setSlideEdge(Gravity.LEFT);
         rightSlide = new Slide();

@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 
 public enum FragmentEnum {
 
-    hyoushi(1, "表紙", new Fragment1());
+    hyoushi(1, "表紙", new HyoushiFragment());
 
     private int page;
     private String name;
