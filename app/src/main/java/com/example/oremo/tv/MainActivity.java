@@ -11,12 +11,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.print.PrintHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -27,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private Slide leftSlide;
     private Slide rightSlide;
 
-    private int page = 1;
+    private int page = 0;
 
     private FragmentEnum[] fragments;
+    private SpeechRecognizer mSpeechRecognizer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,37 +79,41 @@ public class MainActivity extends AppCompatActivity {
     private void nextSlide(){
         if(page < fragments.length){
             page++;
-            switch (page){
-                case 2: Fragment2 fragment2 = new Fragment2();
-                    fragment2.setEnterTransition(rightSlide);
-                    fragment2.setExitTransition(leftSlide);
 
+            for(int i=0;i <fragments.length ;i++){
+                if(page == i){
+                    Fragment fragment = fragments[i].getFragment();
+                    fragment.setEnterTransition(rightSlide);
+                    fragment.setExitTransition(leftSlide);
                     FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
-                    transaction2.replace(R.id.frame, fragment2);
+                    transaction2.replace(R.id.frame, fragment);
                     transaction2.addToBackStack(null);
                     transaction2.commit();
-                    break;
-                case 3: Fragment3 fragment3 = new Fragment3();
-                    fragment3.setEnterTransition(rightSlide);
-                    fragment3.setExitTransition(leftSlide);
-
-                    FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
-                    transaction3.replace(R.id.frame, fragment3);
-                    transaction3.addToBackStack(null);
-                    transaction3.commit();
-                    break;
+                }
             }
+
         }
+    }
+
+
+    private void toFirstSlide(){
+        Fragment fragment = fragments[0].getFragment();
+        fragment.setEnterTransition(leftSlide);
+        fragment.setExitTransition(leftSlide);
+        FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+        transaction2.replace(R.id.frame, fragment);
+        transaction2.addToBackStack(null);
+        transaction2.commit();
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.d("keycode", keyCode+"");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if(page > 1) {
+            if(page > 0) {
                 page--;
             }
-            else if (page == 1){
+            else if (page == 0){
                 finish();
             }
         }
@@ -114,6 +121,86 @@ public class MainActivity extends AppCompatActivity {
             nextSlide();
         }
         return super.onKeyDown(keyCode,event);
+    }
+
+    private void speech() {
+        Log.d("aaa", "開始");
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
+
+        mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle params) {
+                Log.d("aaa", "ggg");
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+
+                Log.d("aaa", "スタート");
+            }
+
+            @Override
+            public void onRmsChanged(float rmsdB) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] buffer) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+
+            @Override
+            public void onResults(Bundle results) {
+                ArrayList<String> recData = results
+                        .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+                String getData = new String();
+
+                for (String s : recData) {
+                    if (TextUtils.isEmpty(getData)) {
+                        getData = s;
+                    } else {
+                        getData = getData + "\n" + s;
+                    }
+                }
+
+                for (FragmentEnum fragmentEnum : fragments) {
+                    if (fragmentEnum.getName().equals(getData)) {
+                        FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                        transaction2.replace(R.id.frame, fragmentEnum.getFragment());
+                        transaction2.addToBackStack(fragmentEnum.getName());
+                        transaction2.commit();
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onPartialResults(Bundle partialResults) {
+
+            }
+
+            @Override
+            public void onEvent(int eventType, Bundle params) {
+
+            }
+        });
+
+        mSpeechRecognizer.startListening(intent);
     }
 
 }

@@ -3,15 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorNavy"
-    tools:context="com.example.oremo.tv.TvFragment">
+    tools:context="com.example.oremo.tv.SekkeiFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <include layout="@layout/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,68 +18,38 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textColor="@color/colorGreen"
             android:textSize="48dp"
-            android:text= "Android TVで出来ること"/>
+            android:text= "設計"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:textSize="24dp"
-            android:text= "・Google cast"/>
+            android:text= "・画面遷移は勉強会資料"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:textSize="24dp"
-            android:text= "・DLNA"/>
+            android:text= "・Android TVに対応"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:textSize="24dp"
-            android:text= "・大画面での表示"/>
+            android:text= "・画面遷移させる方法はリモコンを使う"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:textSize="24dp"
-            android:text= "・音声検索"/>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorGreen"
-            android:layout_marginTop="20dp"
-            android:textSize="48dp"
-            android:text= "Android TVで出来ないこと"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="24dp"
-            android:text= "・電話"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="24dp"
-            android:text= "・ジャイロセンサなどのセンサ"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="24dp"
-            android:text= "・画面のタッチ操作"/>
+            android:text= "・パワーポイントにない機能を実装"/>
     </LinearLayout>
-    </ScrollView>
 
 </FrameLayout>

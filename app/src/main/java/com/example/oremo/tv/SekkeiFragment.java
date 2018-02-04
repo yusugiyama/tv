@@ -10,10 +10,9 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fragmetn6#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragmetn6 extends Fragment {
+public class SekkeiFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -24,7 +23,7 @@ public class Fragmetn6 extends Fragment {
     private String mParam2;
 
 
-    public Fragmetn6() {
+    public SekkeiFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +33,11 @@ public class Fragmetn6 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragmetn6.
+     * @return A new instance of fragment Fragment7.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragmetn6 newInstance(String param1, String param2) {
-        Fragmetn6 fragment = new Fragmetn6();
+    public static SekkeiFragment newInstance(String param1, String param2) {
+        SekkeiFragment fragment = new SekkeiFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,7 +58,7 @@ public class Fragmetn6 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment6, container, false);
+        return inflater.inflate(R.layout.fragment_sekkei, container, false);
     }
 
 }

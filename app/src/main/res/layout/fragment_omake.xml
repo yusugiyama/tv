@@ -37,16 +37,19 @@
             android:layout_height="wrap_content"
             android:text="音声"
             />
-
-        <TextView
-            android:id="@+id/recordText"
-            android:layout_below="@id/record"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/colorGreen"
-            android:textSize="18dp"
-            />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/recordText"
+                android:layout_below="@id/record"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/colorGreen"
+                android:textSize="18dp"
+                />
+        </ScrollView>
 
     </RelativeLayout>
 

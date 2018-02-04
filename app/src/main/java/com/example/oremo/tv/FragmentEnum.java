@@ -9,8 +9,12 @@ import android.support.v4.app.Fragment;
 public enum FragmentEnum {
 
     hyoushi(1, "表紙", new HyoushiFragment()),
-    idea(2,"アイディア", new Fragment2()),
-    omake(3, "おまけ", new Fragment3());
+    idea(2,"アイディア", new IdeaFragment()),
+    omake(3, "おまけ", new OmakeFragment()),
+    tv(5,"テレビ", new TvFragment()),
+    jissen(6, "実践", new JissenFragment()),
+    koudou(4, "行動", new KoudouFragment());
+
 
     private int page;
     private String name;

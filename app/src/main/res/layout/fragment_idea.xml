@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorNavy"
-    tools:context="com.example.oremo.tv.Fragment2">
+    tools:context="com.example.oremo.tv.IdeaFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <include layout="@layout/header"
@@ -17,7 +17,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textColor="@color/colorGreen"
             android:textSize="48dp"
             android:text= "デザインシンキングでアプリを作る"/>

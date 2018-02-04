@@ -1,8 +1,11 @@
 package com.example.oremo.tv;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -20,10 +23,9 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fragment3#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment3 extends Fragment {
+public class OmakeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,9 +36,11 @@ public class Fragment3 extends Fragment {
     private String mParam2;
 
     private SpeechRecognizer mSpeechRecognizer;
+    private SharedPreferences pre;
+    String getData;
 
 
-    public Fragment3() {
+    public OmakeFragment() {
         // Required empty public constructor
     }
 
@@ -49,8 +53,8 @@ public class Fragment3 extends Fragment {
      * @return A new instance of fragment Fragment3.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment3 newInstance(String param1, String param2) {
-        Fragment3 fragment = new Fragment3();
+    public static OmakeFragment newInstance(String param1, String param2) {
+        OmakeFragment fragment = new OmakeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,6 +69,13 @@ public class Fragment3 extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        pre = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
+        getData = pre.getString("speech", null);
+        if(!TextUtils.isEmpty(getData)){
+            ((TextView)getView().findViewById(R.id.recordText)).setText(getData);
+        }
+
     }
 
     @Override
@@ -72,7 +83,7 @@ public class Fragment3 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_fragment3, container, false);
+        View view = inflater.inflate(R.layout.fragment_omake, container, false);
         Button button = view.findViewById(R.id.record);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,16 +140,17 @@ public class Fragment3 extends Fragment {
                 ArrayList<String> recData = results
                         .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-                String getData = new String();
 
                 for (String s : recData) {
                     if(TextUtils.isEmpty(getData)){
                         getData = s;
                     }
                     else{
-                        getData = s + ",";
+                        getData = s + "\n";
                     }
                 }
+                SharedPreferences.Editor editor = pre.edit();
+                editor.putString("speech", getData);
                 ((TextView)getView().findViewById(R.id.recordText)).setText(getData);
             }
 
