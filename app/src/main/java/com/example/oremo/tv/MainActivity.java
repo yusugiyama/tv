@@ -167,20 +167,22 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> recData = results
                         .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-                String getData = new String();
+                String sp = new String();
 
                 for (String s : recData) {
-                    if (TextUtils.isEmpty(getData)) {
-                        getData = s;
+                    if (TextUtils.isEmpty(sp)) {
+                        sp = s;
                     } else {
-                        getData = getData + "\n" + s;
+                        sp = sp + "\n" + s;
                     }
                 }
 
                 for (FragmentEnum fragmentEnum : fragments) {
-                    if (fragmentEnum.getName().equals(getData)) {
+                    if (fragmentEnum.getName().equals(sp)) {
                         FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
-                        transaction2.replace(R.id.frame, fragmentEnum.getFragment());
+                        Fragment fragment = fragmentEnum.getFragment();
+                        fragment.setExitTransition(leftSlide);
+                        transaction2.replace(R.id.frame, fragment);
                         transaction2.addToBackStack(fragmentEnum.getName());
                         transaction2.commit();
                     }
