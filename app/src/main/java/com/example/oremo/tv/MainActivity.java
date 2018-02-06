@@ -19,6 +19,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,15 +39,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextSlide();
-            }
-        });
-
-
 
         fragments = FragmentEnum.values();
 
@@ -63,23 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void printWindow() {
-        View view = this.getWindow().getDecorView();
-        Log.d("aaa",view.getWidth() + "," + view.getHeight());
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
 
-        /*PrintHelper printHelper = new PrintHelper(this);
-        printHelper.setColorMode(PrintHelper.COLOR_MODE_COLOR);
-        printHelper.setScaleMode(PrintHelper.SCALE_MODE_FIT);
-        printHelper.printBitmap("view", bitmap);*/
-    }
 
     private void nextSlide(){
         if(page < fragments.length){
-            page++;
 
+            page++;
             for(int i=0;i <fragments.length ;i++){
                 if(page == i){
                     Fragment fragment = fragments[i].getFragment();
@@ -89,8 +70,11 @@ public class MainActivity extends AppCompatActivity {
                     transaction2.replace(R.id.frame, fragment);
                     transaction2.addToBackStack(null);
                     transaction2.commit();
+
+                    break;
                 }
             }
+
 
         }
     }
@@ -107,20 +91,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.d("keycode", keyCode+"");
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if(page > 0) {
-                page--;
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        String action="";
+        Log.d("aaa", event.getKeyCode()+"");
+        if(event.getAction() == KeyEvent.ACTION_DOWN){
+            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+                if(page > 0) {
+                    page--;
+                }
+                else if (page == 0){
+                    finish();
+                }
             }
-            else if (page == 0){
-                finish();
+            else if(event.getKeyCode() == KeyEvent.KEYCODE_CHANNEL_UP){
+                nextSlide();
+            }
+            else if(event.getKeyCode() == KeyEvent.KEYCODE_MEDIA_RECORD || event.getKeyCode() == KeyEvent.KEYCODE_CHANNEL_DOWN){
+                speech();
+            }
+            else if(event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN){
+                toFirstSlide();
             }
         }
-        else if(keyCode == KeyEvent.KEYCODE_MEDIA_NEXT){
-            nextSlide();
-        }
-        return super.onKeyDown(keyCode,event);
+        return super.dispatchKeyEvent(event);
     }
 
     private void speech() {
@@ -133,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override
             public void onReadyForSpeech(Bundle params) {
-                Log.d("aaa", "ggg");
+                Toast.makeText(getBaseContext(), "話してください", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -176,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                         sp = sp + "\n" + s;
                     }
                 }
+                Log.d("aaa",sp);
 
                 for (FragmentEnum fragmentEnum : fragments) {
                     if (fragmentEnum.getName().equals(sp)) {
@@ -185,10 +179,12 @@ public class MainActivity extends AppCompatActivity {
                         transaction2.replace(R.id.frame, fragment);
                         transaction2.addToBackStack(fragmentEnum.getName());
                         transaction2.commit();
+                        page = fragmentEnum.getPage();
+                        break;
+
                     }
-
-
                 }
+
             }
 
             @Override

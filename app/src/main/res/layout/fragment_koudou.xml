@@ -24,28 +24,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
             android:text= "・プロトタイプ作成"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
             android:text= "・他の人に聞いてもらう、助けてもらう"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
             android:text= "・本気でやらない、ハードルを下げる"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
             android:text= "・リリースしてから学ぶ"/>

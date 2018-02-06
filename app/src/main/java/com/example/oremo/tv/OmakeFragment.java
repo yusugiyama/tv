@@ -4,19 +4,24 @@ package com.example.oremo.tv;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.v4.app.Fragment;
+import android.support.v4.print.PrintHelper;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -70,11 +75,7 @@ public class OmakeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        pre = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
-        getData = pre.getString("speech", null);
-        if(!TextUtils.isEmpty(getData)){
-            ((TextView)getView().findViewById(R.id.recordText)).setText(getData);
-        }
+
 
     }
 
@@ -92,6 +93,34 @@ public class OmakeFragment extends Fragment {
             }
         });
 
+        Button button2 = view.findViewById(R.id.print);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                printWindow();
+            }
+        });
+        pre = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
+        getData = pre.getString("speech", null);
+        if(!TextUtils.isEmpty(getData)){
+            ((TextView)view.findViewById(R.id.recordText)).setText(getData);
+        }
+
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(event.getAction() == KeyEvent.ACTION_DOWN){
+                    if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+                        getData = "";
+                        saveText(getData);
+                        ((TextView)v.findViewById(R.id.recordText)).setText(getData);
+
+                    }
+                }
+                return this.onKey(v, keyCode, event);
+            }
+        });
+
 
         return view;
     }
@@ -106,7 +135,7 @@ public class OmakeFragment extends Fragment {
         mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override
             public void onReadyForSpeech(Bundle params) {
-                Log.d("aaa","ggg");
+                Toast.makeText(getActivity(), "入力します", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -146,11 +175,10 @@ public class OmakeFragment extends Fragment {
                         getData = s;
                     }
                     else{
-                        getData = s + "\n";
+                        getData = getData + "\n" + s;
                     }
                 }
-                SharedPreferences.Editor editor = pre.edit();
-                editor.putString("speech", getData);
+                saveText(getData);
                 ((TextView)getView().findViewById(R.id.recordText)).setText(getData);
             }
 
@@ -168,5 +196,25 @@ public class OmakeFragment extends Fragment {
         mSpeechRecognizer.startListening(intent);
 
     }
+
+    private void printWindow() {
+        View view = getActivity().getWindow().getDecorView();
+        Log.d("aaa",view.getWidth() + "," + view.getHeight());
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        PrintHelper printHelper = new PrintHelper(getActivity());
+        printHelper.setColorMode(PrintHelper.COLOR_MODE_COLOR);
+        printHelper.setScaleMode(PrintHelper.SCALE_MODE_FIT);
+        printHelper.printBitmap("view", bitmap);
+    }
+
+    private void saveText(String st){
+        SharedPreferences.Editor editor = pre.edit();
+        editor.putString("speech", st);
+        editor.commit();
+    }
+
 
 }

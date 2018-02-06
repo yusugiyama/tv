@@ -5,7 +5,9 @@
     android:background="@color/colorNavy"
     tools:context="com.example.oremo.tv.IdeaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <include layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,39 +20,39 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/colorGreen"
             android:textSize="48dp"
-            android:text= "実践"/>
+            android:text= "行動する"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
             android:text= "・勉強会資料作成"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
             android:text= "・勉強会資料を他の人に見てもらう"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
             android:text= "・機能をプレゼン用のみに絞る"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
             android:text= "・最後にアプリの感想などを聞く"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
             android:text= "・パワーポイントにない機能を実装"/>

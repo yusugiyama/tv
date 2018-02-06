@@ -5,6 +5,9 @@
     android:background="@color/colorNavy"
     tools:context="com.example.oremo.tv.AjairuFragment">
 
+    <include layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

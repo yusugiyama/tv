@@ -2,4 +2,5 @@
 <resources>
     <dimen name="small">18dp</dimen>
     <dimen name="large">40dp</dimen>
+    <dimen name="marginTop">20dp</dimen>
 </resources>

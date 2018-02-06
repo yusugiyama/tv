@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorNavy"
-    tools:context="com.example.oremo.tv.SekkeiFragment">
+    tools:context="com.example.oremo.tv.KadaiFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <include layout="@layout/header"
@@ -21,42 +20,28 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/colorGreen"
             android:textSize="48dp"
-            android:text= "設計"/>
+            android:text= "課題"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
-            android:text= "・横画面表示"/>
+            android:text= "・グループの中でPM経験ないエンジニアは自分ひとり"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
-            android:text= "・画面遷移は勉強会資料"/>
+            android:text= "・普通に資料作っても他の人よりいいものは作れない。。。"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginTop"
             android:textColor="@color/white"
             android:textSize="24dp"
-            android:text= "・Android TV対応"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-            android:textColor="@color/white"
-            android:textSize="24dp"
-            android:text= "・リモコンのボタンで画面遷移させる"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-            android:textColor="@color/white"
-            android:textSize="24dp"
-            android:text= "・パワーポイントにない機能を実装"/>
+            android:text= "・TFでアジャイルの開発経験ないので話す内容もあまりない"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorNavy"
-    tools:context="com.example.oremo.tv.ApuriFragment">
+    tools:context="com.example.oremo.tv.TvTitleFragment">
 
     <include layout="@layout/header"
         android:layout_width="match_parent"
@@ -19,12 +19,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorGreen"
             android:textSize="48dp"
-            android:text= "デザインシンキングでアプリを作る"/>
+            android:text= "Android TVって何が出来るの？"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/tuba"/></LinearLayout>
-
+    </LinearLayout>
 
 </FrameLayout>

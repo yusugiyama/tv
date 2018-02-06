@@ -5,7 +5,6 @@
     android:background="@color/colorNavy"
     tools:context="com.example.oremo.tv.IdeaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <include layout="@layout/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -18,9 +17,31 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:textColor="@color/colorGreen"
             android:textSize="48dp"
-            android:text= "デザインシンキングでアプリを作る"/>
+            android:text= "アイディア"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginTop"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:text= "・パワポ風Androidアプリ"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginTop"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:text= "・Android TVで発表"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginTop"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:text= "・パワポにない機能を開発"/>
     </LinearLayout>
 
 
